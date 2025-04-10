@@ -38,15 +38,31 @@ async function createPost(status) {
 }
 // ...existing code...
 
-async function deletePost (tweetId) {
-    await twitterClient.v2.deleteTweet(tweetId);
-    return {
-        content: [
-            {
-                type: "text",
-                text: `Deleted tweet with id ${tweetId}`
-            }
-        ]
+// ...existing code...
+
+async function deletePost(tweetId) {
+    try {
+        const response = await twitterClient.v2.deleteTweet(tweetId);
+        console.log("Delete tweet response:", response);
+        
+        return {
+            content: [
+                {
+                    type: "text",
+                    text: `Deleted tweet with id ${tweetId}`
+                }
+            ]
+        };
+    } catch (error) {
+        console.error("Error deleting tweet:", error);
+        return {
+            content: [
+                {
+                    type: "text",
+                    text: `Failed to delete tweet: ${error.message}`
+                }
+            ]
+        };
     }
 }
 

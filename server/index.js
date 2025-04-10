@@ -47,7 +47,7 @@ server.tool("deletePost", "Delete a post on X formally known as Twitter", {
     tweetId: z.string()
 }, async (arg) => {
     const { tweetId } = arg;
-    return deletePost({ tweetId });
+    return deletePost(tweetId);
 })
 
 
